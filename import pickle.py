@@ -1,13 +1,10 @@
 import pickle
 
-geography = {
-    'Россия': 'Москва',
-    'Беларусь': 'Минск',
-    'Таиланд': 'Бангкок',
-    'Китай': 'Пекин',
-    'Индонезия': 'Джакарта',
-    'Турция': 'Стамбул',
-    'Малайзия': 'Куала - Лумпур',
+music = {
+    'Pink Floyd': 'The wall',
+    'Nirvana': 'Nivermind',
+    'AC/DC': 'Back in Black',
+    'Coldplay': 'A head full of dreams'
 }
 
 
@@ -48,46 +45,46 @@ class MyUnpickler:
         return unpickle_data
 
 
-def add_data(geography, country, capital):
-    if country in geography:
-        print(f"Страна {country} уже существует в базе данных")
+def add_data(musica, gruppa, album):
+    if gruppa in musica:
+        print(f"Группа {gruppa} уже существует в базе данных")
         return False
-    geography[country] = capital
+    musica[gruppa] = album
     return True
 
 
-def remove_data(geography, country):
-    if country not in geography:
+def remove_data(musica, gruppa):
+    if gruppa not in musica:
         print("Такой страны нет")
         return False
-    geography.pop(country)
+    musica.pop(gruppa)
     return True
 
 
-def search_data(geography, country):
-    if country in geography:
-        return geography[country]
+def search_data(musica, gruppa):
+    if gruppa in musica:
+        return musica[gruppa]
     return print('Таких данных нет')
 
 
-def edit_data(geography, country, new_capital):
-    if country not in geography:
-        print(f"Страна {country} не найдена в базе данных.")
+def edit_data(musica, gruppa, new_album):
+    if gruppa not in musica:
+        print(f"Страна {gruppa} не найдена в базе данных.")
         return False
-    old_capital = geography[country]
-    geography[country] = new_capital
-    print(f"Обновлено: {country} - {old_capital} -> {new_capital}")
+    old_capital = musica[gruppa]
+    musica[gruppa] = new_album
+    print(f"Обновлено: {gruppa} - {old_capital} -> {new_album}")
     return True
 
 
 my_pickler_5 = MyPickler(protocol=5)
-my_pickler_5.pickle_file('countries', geography)
-stran = MyUnpickler.unpickle_file('countries')
+my_pickler_5.pickle_file('music_albums', music)
+mus = MyUnpickler.unpickle_file('music_albums')
 
-add_data(stran, 'Япония', 'Токио')
-print(stran)
-remove_data(stran, 'Япония')
-print(stran)
-print(search_data(stran, 'Китай'))
-edit_data(stran, 'Китай', 'Шанхай')
-print(stran)
+add_data(mus, 'Селин Дион', 'Falling into You')
+print(mus)
+remove_data(mus, 'AC/DC')
+print(mus)
+print(search_data(mus, 'Nirvana'))
+edit_data(mus, 'Nirvana', 'In Utero')
+print(mus)
